@@ -8,13 +8,25 @@ const DANCING_CAT_URL =
 
 function walk(img, startPos, stopPos) {
   return new Promise((resolve) => {
-    // Copy over the implementation from last week
+   const intervalId =setInterval(function(){
+    img.style.left= startPos+'px';
+    startPos+= STEP_SIZE_PX;
+    if(startPos>stopPos){
+      clearInterval(intervalId);
+      resolve()
+    }
+  },STEP_INTERVAL_MS)
   });
 }
 
 function dance(img) {
   return new Promise((resolve) => {
-    // Copy over the implementation from last week
+   img.src = DANCING_CAT_URL;
+    setTimeout(()=>{
+      img.src = "http://www.anniemation.com/clip_art/images/cat-walk.gif";
+       resolve();
+  
+    },DANCE_TIME_MS);
   });
 }
 
@@ -25,6 +37,14 @@ async function catWalk() {
   const stopPos = window.innerWidth;
 
   // Use async/await syntax to loop the walk and dance functions
+  try{
+    await walk(img,startPos,centerPos);
+    await dance(img);
+    await walk(img,centerPos,stopPos);
+  }
+ catch (error) {
+    console.error('Error in catWalk:', error);
+  }
 }
 
 window.addEventListener('load', catWalk);
