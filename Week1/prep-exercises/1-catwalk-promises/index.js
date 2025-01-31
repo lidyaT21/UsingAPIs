@@ -8,7 +8,7 @@ const DANCING_CAT_URL =
 const CAT_WALK_URL = "http://www.anniemation.com/clip_art/images/cat-walk.gif"
 function walk(img, startPos, stopPos) {
   return new Promise((resolve) => {
-  
+    
      let currentPosition = startPos
      img.style.left = `${currentPosition}px`
    const currentInterval = setInterval(()=>{
@@ -17,7 +17,7 @@ function walk(img, startPos, stopPos) {
      
       if (currentPosition >= stopPos) {
       clearInterval(currentInterval)
-      resolve()
+       resolve()
   }
     },STEP_INTERVAL_MS)
      
